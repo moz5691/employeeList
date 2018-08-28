@@ -1,43 +1,43 @@
 const employeeList = [
   {
-    name: "Jan",
+    name: 'Jan',
     officeNum: 1,
-    phoneNum: "222-222-2222"
+    phoneNum: '222-222-2222'
   },
   {
-    name: "Juan",
+    name: 'Juan',
     officeNum: 304,
-    phoneNum: "489-789-8789"
+    phoneNum: '489-789-8789'
   },
   {
-    name: "Margie",
+    name: 'Margie',
     officeNum: 789,
-    phoneNum: "789-789-7897"
+    phoneNum: '789-789-7897'
   },
   {
-    name: "Sara",
+    name: 'Sara',
     officeNum: 32,
-    phoneNum: "222-789-4654"
+    phoneNum: '222-789-4654'
   },
   {
-    name: "Tyrell",
+    name: 'Tyrell',
     officeNum: 3,
-    phoneNum: "566-621-0452"
+    phoneNum: '566-621-0452'
   },
   {
-    name: "Tasha",
+    name: 'Tasha',
     officeNum: 213,
-    phoneNum: "789-766-5675"
+    phoneNum: '789-766-5675'
   },
   {
-    name: "Ty",
+    name: 'Ty',
     officeNum: 211,
-    phoneNum: "789-766-7865"
+    phoneNum: '789-766-7865'
   },
   {
-    name: "Sarah",
+    name: 'Sarah',
     officeNum: 345,
-    phoneNum: "222-789-5231"
+    phoneNum: '222-789-5231'
   }
 ];
 
@@ -46,42 +46,42 @@ const employeeList = [
 // lookup: Find an employee, contains: search partial or full name,
 // update: update employeeList, add: add a new employee,
 // delete: delete an employee.
-const command = prompt("Enter your command: ");
+const command = prompt('Enter your command: ');
 switch (command) {
-  case "print":
+  case 'print':
     printAll();
     break;
-  case "verify":
-    const name1 = prompt("Enter the name to verify:");
+  case 'verify':
+    const name1 = prompt('Enter the name to verify:');
     verifyEmployee(name1);
     break;
-  case "lookup":
-    const name2 = prompt("Enter the name to look up:");
+  case 'lookup':
+    const name2 = prompt('Enter the name to look up:');
     lookUp(name2);
     break;
-  case "contains":
-    const name3 = prompt("Enter partial name to look up:");
+  case 'contains':
+    const name3 = prompt('Enter partial name to look up:');
     containsEmployee(name3);
     break;
-  case "update":
-    const employeeName = prompt("Enter the emplyee name");
+  case 'update':
+    const employeeName = prompt('Enter the emplyee name');
     updateEmployee(employeeName);
     // printAll();
     break;
-  case "add":
-    const nameToAdd = prompt("Enter the employee name to add: ");
-    const officeToAdd = prompt("Enter the offince number: ");
-    const phoneToAdd = prompt("Enter the phone number to add: ");
+  case 'add':
+    const nameToAdd = prompt('Enter the employee name to add: ');
+    const officeToAdd = prompt('Enter the offince number: ');
+    const phoneToAdd = prompt('Enter the phone number to add: ');
     addEmployee(nameToAdd, officeToAdd, phoneToAdd);
     printAll();
     break;
-  case "delete":
-    const nameToDelete = prompt("Enter the employee name to delete: ");
+  case 'delete':
+    const nameToDelete = prompt('Enter the employee name to delete: ');
     deleteEmployee(nameToDelete);
     printAll();
     break;
   default:
-    console.print("wrong command");
+    console.print('wrong command');
 }
 
 function printAll() {
@@ -103,7 +103,7 @@ function lookUp(name) {
 function verifyEmployee(name) {
   const index = employeeList.findIndex(employee => employee.name === name);
   console.log(index);
-  if (index > 0) {
+  if (index >= 0) {
     render(`True`);
   } else {
     render(`False`);
@@ -114,7 +114,7 @@ function containsEmployee(search) {
   const list = employeeList.filter(content => content.name.includes(search));
   console.log(list);
   if (list.length === 0) {
-    render("no match found...");
+    render('no match found...');
   } else {
     for (let i in list) {
       console.log(list[i].name, list[i].officeNum, list[i].phoneNum);
@@ -126,18 +126,18 @@ function updateEmployee(name) {
   const updateName = employeeList.find(employee => employee.name === name);
   console.log(updateName);
   if (updateName === undefined) {
-    render("no match found...");
+    render('no match found...');
   } else {
     const field = prompt("Which fied to update, 'office' or 'phone' ?");
-    if (field === "office") {
-      let value = prompt("What is the update value? ");
+    if (field === 'office') {
+      let value = prompt('What is the update value? ');
       updateName.officeNum = value;
-    } else if (field === "phone") {
-      let value = prompt("What is the update value? ");
+    } else if (field === 'phone') {
+      let value = prompt('What is the update value? ');
       updateName.phoneNum = value;
     } else {
       render(`wrong field entered...`);
-      console.log("wrong field..");
+      console.log('wrong field..');
     }
     render(`${updateName.name} ${updateName.officeNum} ${updateName.phoneNum}`);
   }

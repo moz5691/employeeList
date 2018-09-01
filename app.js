@@ -47,26 +47,27 @@ const employeeList = [
 // update: update employeeList, add: add a new employee,
 // delete: delete an employee.
 const command = prompt('Enter your command: ');
-switch (command) {
+switch (command.toLocaleLowerCase()) {
   case 'print':
     printAll();
     break;
   case 'verify':
-    const name1 = prompt('Enter the name to verify:');
-    verifyEmployee(name1);
+    const nameToVerify = prompt('Enter the name to verify:');
+    verifyEmployee(nameToVerify);
     break;
   case 'lookup':
-    const name2 = prompt('Enter the name to look up:');
-    lookUp(name2);
+    const nameToLookup = prompt('Enter the name to look up:');
+    lookUp(nameToLookup);
     break;
   case 'contains':
-    const name3 = prompt('Enter partial name to look up:');
-    containsEmployee(name3);
+    const nameToContain = prompt(
+      'Enter partial contained in the name to search:'
+    );
+    containsEmployee(nameToContain);
     break;
   case 'update':
-    const employeeName = prompt('Enter the emplyee name');
-    updateEmployee(employeeName);
-    // printAll();
+    const nameToUpdate = prompt('Enter the emplyee name');
+    updateEmployee(nameToUpdate);
     break;
   case 'add':
     const nameToAdd = prompt('Enter the employee name to add: ');
@@ -81,87 +82,5 @@ switch (command) {
     printAll();
     break;
   default:
-    console.print('wrong command');
-}
-
-function printAll() {
-  for (let i = 0; i < employeeList.length; i++) {
-    render(`${employeeList[i].name},
-    ${employeeList[i].officeNum},
-    ${employeeList[i].phoneNum}`);
-  }
-}
-// look up code....
-function lookUp(name) {
-  const result = employeeList.find(employee => employee.name === name);
-  console.log(result);
-  if (result === undefined) {
-    render(`no match found...`);
-  } else render(`${result.name} ${result.officeNum} ${result.phoneNum}`);
-}
-
-function verifyEmployee(name) {
-  const index = employeeList.findIndex(employee => employee.name === name);
-  console.log(index);
-  if (index >= 0) {
-    render(`True`);
-  } else {
-    render(`False`);
-  }
-}
-
-function containsEmployee(search) {
-  const list = employeeList.filter(content => content.name.includes(search));
-  console.log(list);
-  if (list.length === 0) {
-    render('no match found...');
-  } else {
-    for (let i in list) {
-      console.log(list[i].name, list[i].officeNum, list[i].phoneNum);
-    }
-  }
-}
-
-function updateEmployee(name) {
-  const updateName = employeeList.find(employee => employee.name === name);
-  console.log(updateName);
-  if (updateName === undefined) {
-    render('no match found...');
-  } else {
-    const field = prompt("Which fied to update, 'office' or 'phone' ?");
-    if (field === 'office') {
-      let value = prompt('What is the update value? ');
-      updateName.officeNum = value;
-    } else if (field === 'phone') {
-      let value = prompt('What is the update value? ');
-      updateName.phoneNum = value;
-    } else {
-      render(`wrong field entered...`);
-      console.log('wrong field..');
-    }
-    render(`${updateName.name} ${updateName.officeNum} ${updateName.phoneNum}`);
-  }
-}
-
-function addEmployee(name1, officeNum1, phoneNum1) {
-  const addToEmployeeList = {
-    name: name1,
-    officeNum: officeNum1,
-    phoneNum: phoneNum1
-  };
-  employeeList.push(addToEmployeeList);
-  console.log(employeeList);
-}
-
-function deleteEmployee(name) {
-  const result = employeeList.find(employee => employee.name === name);
-  // console.log(result);
-  const removeIndex = employeeList.indexOf(result);
-  // console.log(removeIndex);
-  if (removeIndex === -1) {
-    render(`Found no match..`);
-  } else {
-    employeeList.splice(removeIndex, 1);
-    //  render(`${result.name} ${result.officeNum} ${result.phoneNum}`);
-  }
+    render(`Wrong command..`);
 }

@@ -28,7 +28,7 @@ const verifyEmployee = name => {
 // containsEmployee has no feature of case-insensitive.  This is to-do...
 const containsEmployee = search => {
   const listContains = employeeList.filter(content =>
-    content.name.includes(search)
+    content.name.toLowerCase().includes(search.toLowerCase())
   );
   if (listContains.length === 0) {
     render('no match found...');
